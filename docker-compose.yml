@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./build/php/Dockerfile
+    volumes:
+      - ./code:/var/www/html
+
+  php-apache:
+    build:
+      context: .
+      dockerfile: ./build/apache/Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certificates:/etc/ssl/certs
+      - ./httpd:/usr/local/apache2/conf
+      - ./code:/var/www/html
+
+  db:
+    build:
+      context: .
+      dockerfile: ./build/db/mysql/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: '[123456]'
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: '[123456]'
+    volumes:
+      - db_data:/var/lib/mysql
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  db_data:
