@@ -5,8 +5,11 @@ services:
     build:
       context: .
       dockerfile: ./build/php/Dockerfile
+    ports:
+      - "9000:9000"
     volumes:
       - ./code:/var/www/html
+    
 
   php-apache:
     build:

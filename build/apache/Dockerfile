@@ -4,6 +4,8 @@ FROM httpd:2.4
 COPY httpd/httpd-vhosts.conf /usr/local/apache2/conf/httpd.conf
 COPY httpd/httpd-vhosts.conf /usr/local/apache2/conf/extra/httpd-vhosts.conf
 
+
+
 # Copiar los certificados al contenedor
 COPY /certificates/mydomain.crt /etc/ssl/certs/mydomain.crt
 COPY /certificates/mydomain.key /etc/ssl/certs/mydomain.key
@@ -25,6 +27,6 @@ RUN sed -i '/<VirtualHost \*:80>/a \
             AllowOverride FileInfo All\n\
             Require all granted\n\
         </Directory>\n\
-        ProxyPassMatch ^/(.*\.php)$ fcgi://php:9000/var/www/html/public/$1\n\
+        ProxyPassMatch ^/(.*\.php)$ fcgi://php:9000/var/www/html/\n\
     </VirtualHost>' /usr/local/apache2/conf/extra/httpd-vhosts.conf
 
