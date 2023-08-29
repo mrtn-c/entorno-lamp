@@ -33,6 +33,7 @@ services:
       MYSQL_PASSWORD: '[123456]'
     volumes:
       - db_data:/var/lib/mysql
+      - ./build/db/mysql/colo.sql:/docker-entrypoint-initdb.d/colo.sql
 
 networks:
   my_network:
