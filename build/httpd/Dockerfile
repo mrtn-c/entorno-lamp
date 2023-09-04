@@ -13,3 +13,11 @@ COPY ./httpd/httpd-vhosts.conf /usr/local/apache2/conf/extra/httpd-vhosts.conf
 
 COPY ./certificates/proxyman_ca.crt /usr/local/share/ca-certificates/proxyman_ca.crt
 RUN chmod 644 /usr/local/share/ca-certificates/proxyman_ca.crt && update-ca-certificates
+
+USER www-data
+
+WORKDIR /var/www/html
+
+RUN  chown=www-data:www-data
+
+USER root

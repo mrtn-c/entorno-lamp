@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
 docker compose --env-file .env up --build --remove-orphans "$@"
+
